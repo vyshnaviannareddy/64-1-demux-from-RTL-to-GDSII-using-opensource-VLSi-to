@@ -99,18 +99,51 @@ The finished layout was exported for signoff physical verification. Magic DRC co
 ```text
 64-1-demux-from-RTL-to-GDSII-using-opensource-VLSI-to/
 ├── demux ss/               # Visual logs, simulation waveforms, and layout screenshots
-│   ├── area.png
-│   ├── drc.png
-│   ├── floorning.png
-│   ├── klayout.png
-│   ├── magic.png
-│   ├── placement.png
-│   ├── power.png
-│   ├── routing.png
-│   └── waveforms.png
 ├── src/                    # Verilog source files and testbench
-│   ├── demux.v
-│   └── tb_demux.v
 ├── config.json             # OpenLane configurations
 ├── demux.gds               # Final exported binary stream file
 └── README.md               # Project documentation
+```
+## 🚀 How to Reproduce
+
+Rebuild this physical layout blueprint on your local environment:
+
+### Prerequisites:
+* Linux OS (Ubuntu environment recommended)
+* Docker engine installed and configured
+* OpenLane workspace clone with configured Sky130 PDK
+
+---
+
+### Step 1: Execute Functional Verification
+
+Verify the behavioral netlist prior to logic translation:
+
+
+# Compile design and testbench modules
+```
+iverilog -o tb_demux src/demux.v src/tb_demux.v
+```
+# Execute simulation runtime to output VCD dump
+```
+vvp tb_demux
+```
+# Open wave structures visually
+```
+gtkwave demux.vcd
+```
+### Step 2: Run the Physical Design Pipeline
+
+Move this design directory inside your native OpenLane installation route under `<OpenLane_Root>/designs/`.
+
+# 1. Mount the interactive OpenLane environment container
+```
+make mount
+```
+# 2. Run the automated layout generation script
+```
+./flow.tcl -design demux
+```
+## 🤝 Acknowledgments
+1. Google / SkyWater Foundation:** For lowering the barrier of entry by open-sourcing the 130nm PDK.
+2. The OpenROAD Project:** For developing robust, fully automated EDA placement, routing, and physical abstraction engines.
