@@ -1,0 +1,18 @@
+{
+    "DESIGN_NAME": "demux",
+
+    "VERILOG_FILES": [
+        "dir::src/demux.v"
+    ],
+
+    "CLOCK_PORT": null,
+    "CLOCK_NET": null,
+
+    "FP_CORE_UTIL": 20,
+
+    "PL_TARGET_DENSITY": 0.45,
+
+    "DIE_AREA": "0 0 250 250",
+
+    "FP_SIZING": "absolute"
+}
